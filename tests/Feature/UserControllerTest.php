@@ -26,7 +26,7 @@ class UserControllerTest extends TestCase
     public function testLoginPageForMember()
     {
         $this->withSession([
-            "user" => "khannedy"
+            "user" => "Daffarizqy"
         ])->get('/login')
             ->assertRedirect("/");
     }
@@ -36,18 +36,18 @@ class UserControllerTest extends TestCase
         $this->seed(UserSeeder::class);
 
         $this->post('/login', [
-            "user" => "eko@localhost",
+            "user" => "pro@localhost",
             "password" => "rahasia"
         ])->assertRedirect("/")
-            ->assertSessionHas("user", "eko@localhost");
+            ->assertSessionHas("user", "pro@localhost");
     }
 
     public function testLoginForUserAlreadyLogin()
     {
         $this->withSession([
-            "user" => "khannedy"
+            "user" => "Daffarizqy"
         ])->post('/login', [
-            "user" => "khannedy",
+            "user" => "Daffarizqy",
             "password" => "rahasia"
         ])->assertRedirect("/");
     }
@@ -69,7 +69,7 @@ class UserControllerTest extends TestCase
     public function testLogout()
     {
         $this->withSession([
-            "user" => "khannedy"
+            "user" => "Daffarizqy"
         ])->post('/logout')
             ->assertRedirect("/")
             ->assertSessionMissing("user");

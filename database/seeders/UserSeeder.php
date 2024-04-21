@@ -14,8 +14,8 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $user = new User();
-        $user->name = "Eko Kurniawan Khannedy";
-        $user->email = "eko@localhost";
+        $user->name = "Daffarizqy Prastowiyono";
+        $user->email = "pro@localhost";
         $user->password = bcrypt("rahasia");
         $user->save();
     }
