@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
@@ -38,6 +40,19 @@
                     <input type="text" class="form-control" name="todo" placeholder="todo">
                     <label for="todo">Todo</label>
                 </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="deadline" id="deadline" placeholder="Deadline">
+                    <label for="deadline">Deadline</label>
+                </div>
+                <script>
+                    flatpickr("#deadline", {
+                        enableTime: true, // Aktifkan waktu
+                        dateFormat: "Y-m-d H:i", // Format tanggal dan waktu
+                        minDate: "today", // Batasi tanggal minimal yang dapat dipilih
+                        time_24hr: true // Gunakan format waktu 24 jam
+                    });
+                </script>
+
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Add Todo</button>
             </form>
         </div>
@@ -50,10 +65,11 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">No</th>
                     <th scope="col">Todo</th>
                     <th scope="col">Tanggal</th>
-                    <th scope="col"></th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,10 +77,21 @@
                     <tr>
                         <th scope="row">{{$todo['id']}}</th>
                         <td>{{$todo['todo']}}</td>
+                        <td>{{$todo['tanggal']}}</td>
+                        <td>{{$todo['deadline']}}</td>
+                        <td></td>
                         <td>
                             <form action="/todolist/{{$todo['id']}}/delete" method="post">
                                 @csrf
                                 <button class="w-100 btn btn-lg btn-danger" type="submit">Remove</button>
+                            </form>
+                            <form action="/todolist/{{$todo['id']}}/edit" method="post">
+                                @csrf
+                                <button class="w-100 btn btn-lg btn-warning" type="submit">edit</button>
+                            </form>
+                            <form action="/todolist/{{$todo['id']}}/update" method="post">
+                                @csrf
+                                <button class="w-100 btn btn-lg btn-success" type="submit">update</button>
                             </form>
                         </td>
                     </tr>
